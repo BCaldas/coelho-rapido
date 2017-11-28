@@ -6,9 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import java.util.concurrent.ExecutionException;
 
-import br.com.brunocaldas.coelhorapido.services.BaseService;
+import br.com.brunocaldas.coelhorapido.models.Usuario;
 import br.com.brunocaldas.coelhorapido.services.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,12 +31,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Usuario usuario = usuarioService.buscarPorId(1);
-                    Toast.makeText(getApplicationContext(),usuario.getCadastro(),Toast.LENGTH_LONG).show();
+                        Usuario usuario = usuarioService.fazerLogin("pe","123");
+//                        Usuario usuario = usuarioService.buscarPorId(2);
+
+                    Toast.makeText(getApplicationContext(),usuario.getNome(),Toast.LENGTH_LONG).show();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+
                 } catch (ExecutionException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+                } catch (NullPointerException e) {
+                    Toast.makeText(getApplicationContext(),"Usuário não encontrado",Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }

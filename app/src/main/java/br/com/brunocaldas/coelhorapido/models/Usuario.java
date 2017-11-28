@@ -1,4 +1,4 @@
-package br.com.brunocaldas.coelhorapido;
+package br.com.brunocaldas.coelhorapido.models;
 
 import java.util.Date;
 
