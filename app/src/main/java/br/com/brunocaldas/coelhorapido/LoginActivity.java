@@ -3,7 +3,9 @@ package br.com.brunocaldas.coelhorapido;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -16,6 +18,8 @@ import br.com.brunocaldas.coelhorapido.services.UsuarioService;
 public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
+    AutoCompleteTextView login;
+    EditText senha;
     UsuarioService usuarioService;
 
     @Override
@@ -31,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                        Usuario usuario = usuarioService.fazerLogin("pe","123");
-//                        Usuario usuario = usuarioService.buscarPorId(2);
+                        Usuario usuario = usuarioService.fazerLogin(login.getText().toString(),
+                                senha.getText().toString());
 
                     Toast.makeText(getApplicationContext(),usuario.getNome(),Toast.LENGTH_LONG).show();
 
@@ -54,5 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void binding() {
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        login = (AutoCompleteTextView) findViewById(R.id.txtLogin);
+        senha = (EditText) findViewById(R.id.txtSenha);
     }
 }

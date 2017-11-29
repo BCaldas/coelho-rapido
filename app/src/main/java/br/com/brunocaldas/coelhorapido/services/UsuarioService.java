@@ -13,10 +13,16 @@ import br.com.brunocaldas.coelhorapido.models.Usuario;
  * Created by bruno on 28/11/2017.
  */
 
-public class UsuarioService extends BaseService {
+public class UsuarioService{
+
+    private static final String path = "usuarios";
 
     public UsuarioService() {
-        super("usuarios");
+
+    }
+
+    private UsuarioService factory() {
+        return new UsuarioService();
     }
 
     public Usuario fazerLogin(String login, String senha) throws JSONException, ExecutionException, InterruptedException {
@@ -26,10 +32,10 @@ public class UsuarioService extends BaseService {
         obj.put("login", login);
         obj.put("senha",senha);
 
-        return new Gson().fromJson(this.doPost(obj,"login"),Usuario.class);
+        return new Gson().fromJson(new BaseService(path).doPost(obj,"login"),Usuario.class);
     }
 
     public Usuario buscarPorId(Integer id) throws ExecutionException, InterruptedException {
-        return new Gson().fromJson(this.doGet(id.toString()),Usuario.class);
+        return new Gson().fromJson(new BaseService(path).doGet(id.toString()),Usuario.class);
     }
 }

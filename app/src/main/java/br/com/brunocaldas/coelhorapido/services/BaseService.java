@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
-public abstract class BaseService<T> extends AsyncTask<Void, Void, String> {
+public class BaseService extends AsyncTask<Void, Void, String> {
 
     private static final String baseUrl = "http://192.168.25.10:8080/api/";
 
@@ -31,13 +31,13 @@ public abstract class BaseService<T> extends AsyncTask<Void, Void, String> {
         this.path = path;
     }
 
-    protected String doGet(String params) throws ExecutionException, InterruptedException {
+    public String doGet(String params) throws ExecutionException, InterruptedException {
         this.method = "GET";
         this.params = params;
         return this.execute().get();
     }
 
-    protected String doPost(JSONObject postParams, String params) throws ExecutionException, InterruptedException {
+    public String doPost(JSONObject postParams, String params) throws ExecutionException, InterruptedException {
         this.method = "POST";
         this.params = params;
         this.postParams = postParams;
@@ -68,24 +68,17 @@ public abstract class BaseService<T> extends AsyncTask<Void, Void, String> {
                 output.flush();
                 output.close();
 
-                InputStreamReader in = new InputStreamReader(connection.getInputStream());
-                BufferedReader br = new BufferedReader(in);
-                String text = "";
-                while ((text = br.readLine()) != null) {
-                    resposta.append(text);
-                }
-
-                connection.connect();
-
-            } else if (method.equals("GET")) {
-                connection.connect();
-                Scanner scanner = new Scanner(url.openStream());
-                while (scanner.hasNext()) {
-                    resposta.append(scanner.next());
-                }
             }
 
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            String text = "";
+            while ((text = br.readLine()) != null) {
+                resposta.append(text);
+            }
+            connection.connect();
             connection.disconnect();
+            br.close();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
