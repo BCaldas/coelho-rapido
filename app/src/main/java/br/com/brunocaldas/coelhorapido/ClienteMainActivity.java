@@ -1,5 +1,6 @@
 package br.com.brunocaldas.coelhorapido;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import br.com.brunocaldas.coelhorapido.models.Usuario;
 
 public class ClienteMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Usuario usuario;
+
+    TextView lblNome, lblEmail;
+    NavigationView menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +51,12 @@ public class ClienteMainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        binding();
+
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        lblNome.setText(usuario.getNome());
+        lblEmail.setText(usuario.getEmail());
     }
 
     @Override
@@ -55,7 +72,7 @@ public class ClienteMainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.clientemain, menu);
         return true;
     }
 
@@ -67,9 +84,6 @@ public class ClienteMainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -80,22 +94,25 @@ public class ClienteMainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_solicitar_entrega) {
+            Intent i = new Intent(getApplicationContext(), NovaEntregaActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_consultar_entrega) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_sair) {
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void binding() {
+        menu = (NavigationView) findViewById(R.id.nav_view);
+        View headerMenu = menu.getHeaderView(0);
+        lblNome = (TextView) headerMenu.findViewById(R.id.lblNomeUsuario);
+        lblEmail = (TextView) headerMenu.findViewById(R.id.lblEmailUsuario);
     }
 }

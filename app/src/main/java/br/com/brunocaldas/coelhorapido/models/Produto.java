@@ -10,12 +10,12 @@ public class Produto implements Serializable {
 
     private Long id;
     private String descricao;
-    private double peso;
+    private Double peso;
 
     public Produto() {
     }
 
-    public Produto(Long id, String descricao, double peso) {
+    public Produto(Long id, String descricao, Double peso) {
         this.id = id;
         this.descricao = descricao;
         this.peso = peso;
@@ -33,10 +33,10 @@ public class Produto implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public double getPeso() {
+    public Double getPeso() {
         return peso;
     }
-    public void setPeso(double peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 }

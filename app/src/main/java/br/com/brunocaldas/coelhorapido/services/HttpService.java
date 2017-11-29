@@ -4,18 +4,14 @@ import android.os.AsyncTask;
 
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
 public class HttpService extends AsyncTask<Void, Void, String> {
@@ -51,7 +47,6 @@ public class HttpService extends AsyncTask<Void, Void, String> {
             URL url = new URL(baseUrl + path + "/" + params);
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                connection.setDoInput(true);
             connection.setRequestMethod(method);
             connection.setRequestProperty("Content-type", "application/json");
             connection.setRequestProperty("Accept", "application/json");
@@ -73,8 +68,10 @@ public class HttpService extends AsyncTask<Void, Void, String> {
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
             String text = "";
+            JSONObject json = new JSONObject();
             while ((text = br.readLine()) != null) {
                 resposta.append(text);
+
             }
             connection.connect();
             connection.disconnect();
@@ -85,6 +82,7 @@ public class HttpService extends AsyncTask<Void, Void, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return resposta.toString();
     }
 }

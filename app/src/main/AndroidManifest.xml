@@ -22,6 +22,10 @@
         <activity
             android:name=".ClienteMainActivity"
             android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NovaEntregaActivity"
+            android:label="@string/title_activity_nova_entrega"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

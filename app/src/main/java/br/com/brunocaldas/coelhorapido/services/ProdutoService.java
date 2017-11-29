@@ -1,5 +1,7 @@
 package br.com.brunocaldas.coelhorapido.services;
 
+import java.util.List;
+
 import br.com.brunocaldas.coelhorapido.models.Produto;
 
 /**
@@ -11,6 +13,6 @@ public class ProdutoService extends BaseService<Produto> {
     private static final String path = "produtos";
 
     public ProdutoService() {
-        super(path,Produto.class);
+        super(path,Produto.class,Produto[].class);
     }
 }

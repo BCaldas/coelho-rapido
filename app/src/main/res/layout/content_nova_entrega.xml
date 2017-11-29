@@ -5,7 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.com.brunocaldas.coelhorapido.ClienteMainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context="br.com.brunocaldas.coelhorapido.NovaEntregaActivity"
+    tools:showIn="@layout/activity_nova_entrega">
 
+    <ListView
+        android:id="@+id/lstProdutos"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 </android.support.constraint.ConstraintLayout>

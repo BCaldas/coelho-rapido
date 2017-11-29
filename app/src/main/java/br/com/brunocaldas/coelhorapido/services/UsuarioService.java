@@ -1,11 +1,7 @@
 package br.com.brunocaldas.coelhorapido.services;
 
 import com.google.gson.Gson;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.util.concurrent.ExecutionException;
-
 import br.com.brunocaldas.coelhorapido.dtos.UsuarioLoginDTO;
 import br.com.brunocaldas.coelhorapido.models.Usuario;
 
@@ -18,7 +14,7 @@ public class UsuarioService extends BaseService<Usuario>{
     private static final String path = "usuarios";
 
     public UsuarioService() {
-        super(path,Usuario.class);
+        super(path,Usuario.class,Usuario[].class);
     }
 
     public Usuario fazerLogin(String login, String senha) {

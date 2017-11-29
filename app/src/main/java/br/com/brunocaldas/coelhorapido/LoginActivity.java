@@ -8,7 +8,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.List;
+
+import br.com.brunocaldas.coelhorapido.models.Produto;
 import br.com.brunocaldas.coelhorapido.models.Usuario;
+import br.com.brunocaldas.coelhorapido.services.ProdutoService;
 import br.com.brunocaldas.coelhorapido.services.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
