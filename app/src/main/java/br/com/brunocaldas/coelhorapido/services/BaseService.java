@@ -1,90 +1,35 @@
 package br.com.brunocaldas.coelhorapido.services;
 
-import android.os.AsyncTask;
+import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Scanner;
+import java.lang.reflect.Type;
 import java.util.concurrent.ExecutionException;
 
-public class BaseService extends AsyncTask<Void, Void, String> {
+import br.com.brunocaldas.coelhorapido.models.Usuario;
 
-    private static final String baseUrl = "http://192.168.25.10:8080/api/";
+/**
+ * Created by bruno on 28/11/2017.
+ */
 
-    private String method;
+public abstract class BaseService<T> {
+
+    private Class<T> clazz;
+
     private String path;
-    private String params;
-    private JSONObject postParams;
 
-    public BaseService(String path) {
+    public BaseService(String path, Class<T> clazz) {
         this.path = path;
+        this.clazz = clazz;
     }
 
-    public String doGet(String params) throws ExecutionException, InterruptedException {
-        this.method = "GET";
-        this.params = params;
-        return this.execute().get();
-    }
-
-    public String doPost(JSONObject postParams, String params) throws ExecutionException, InterruptedException {
-        this.method = "POST";
-        this.params = params;
-        this.postParams = postParams;
-        return this.execute().get();
-    }
-
-    @Override
-    protected String doInBackground(Void... voids) {
-        StringBuilder resposta = new StringBuilder();
+    public T buscarPorId(Integer id){
         try {
-            URL url = new URL(baseUrl + path + "/" + params);
-
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                connection.setDoInput(true);
-            connection.setRequestMethod(method);
-            connection.setRequestProperty("Content-type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
-
-            connection.setConnectTimeout(5000);
-
-            if (method.equals("POST")) {
-                connection.setDoOutput(true);
-                connection.setRequestProperty("Content-Length", String.valueOf(postParams.toString().getBytes().length));
-                connection.setFixedLengthStreamingMode(postParams.toString().getBytes().length);
-
-                OutputStream output = new BufferedOutputStream(connection.getOutputStream());
-                output.write(postParams.toString().getBytes());
-                output.flush();
-                output.close();
-
-            }
-
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-            String text = "";
-            while ((text = br.readLine()) != null) {
-                resposta.append(text);
-            }
-            connection.connect();
-            connection.disconnect();
-            br.close();
-
-        } catch (MalformedURLException e) {
+            return new Gson().fromJson(new HttpService(path).doGet(id.toString()),clazz);
+        } catch (ExecutionException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return resposta.toString();
+        return null;
     }
 }

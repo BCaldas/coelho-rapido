@@ -4,38 +4,34 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.concurrent.ExecutionException;
 
+import br.com.brunocaldas.coelhorapido.dtos.UsuarioLoginDTO;
 import br.com.brunocaldas.coelhorapido.models.Usuario;
 
 /**
  * Created by bruno on 28/11/2017.
  */
 
-public class UsuarioService{
+public class UsuarioService extends BaseService<Usuario>{
 
     private static final String path = "usuarios";
 
     public UsuarioService() {
-
+        super(path,Usuario.class);
     }
 
-    private UsuarioService factory() {
-        return new UsuarioService();
-    }
+    public Usuario fazerLogin(String login, String senha) {
 
-    public Usuario fazerLogin(String login, String senha) throws JSONException, ExecutionException, InterruptedException {
+        String params = new Gson().toJson(new UsuarioLoginDTO(login,senha));
 
-        JSONObject obj = new JSONObject();
-
-        obj.put("login", login);
-        obj.put("senha",senha);
-
-        return new Gson().fromJson(new BaseService(path).doPost(obj,"login"),Usuario.class);
-    }
-
-    public Usuario buscarPorId(Integer id) throws ExecutionException, InterruptedException {
-        return new Gson().fromJson(new BaseService(path).doGet(id.toString()),Usuario.class);
+        try {
+            return new Gson().fromJson(new HttpService(path).doPost(params,"login"),Usuario.class);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

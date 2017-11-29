@@ -1,14 +1,13 @@
 package br.com.brunocaldas.coelhorapido.models;
 
-import java.util.Date;
-
+import java.io.Serializable;
 import br.com.brunocaldas.coelhorapido.enums.ETipoUsuario;
 
 /**
  * Created by bruno on 27/11/2017.
  */
 
-public class Usuario {
+public class Usuario implements Serializable{
 
     private Long id;
     private String nome;
