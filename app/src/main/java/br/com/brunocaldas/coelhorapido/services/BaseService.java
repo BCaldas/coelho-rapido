@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import br.com.brunocaldas.coelhorapido.dtos.UsuarioLoginDTO;
 import br.com.brunocaldas.coelhorapido.models.Produto;
 import br.com.brunocaldas.coelhorapido.models.Usuario;
 
@@ -27,7 +28,7 @@ public abstract class BaseService<T> {
         this.clazzes = clazzes;
     }
 
-    public T buscarPorId(Integer id){
+    protected T buscarPorId(Integer id){
         try {
             return new Gson().fromJson(new HttpService(path).doGet(id.toString()),clazz);
         } catch (ExecutionException e) {
@@ -38,13 +39,27 @@ public abstract class BaseService<T> {
         return null;
     }
 
-    public List<T> buscarTodos() {
+    protected List<T> buscarTodos() {
+
         try {
             T[] t = new Gson().fromJson(new HttpService(path).doGet(""),clazzes);
             return Arrays.asList(t);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected T salvar(T entidade) {
+        String params = new Gson().toJson(entidade);
+
+        try {
+            return new Gson().fromJson(new HttpService(path).doPost(params,""),clazz);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
         return null;
