@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="13dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintBottom_toTopOf="@+id/txtValor"
+            app:layout_constraintBottom_toTopOf="@+id/txtMotorista"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView8" />
 
@@ -133,12 +133,12 @@
             android:layout_height="wrap_content"
             android:text="Valor:"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            app:layout_constraintBaseline_toBaselineOf="@+id/txtValor"
-            app:layout_constraintEnd_toStartOf="@+id/txtValor"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txtMotorista"
+            app:layout_constraintEnd_toStartOf="@+id/txtMotorista"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/txtValor"
+            android:id="@+id/txtMotorista"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"

@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".ClienteMainActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/title_activity_cliente_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NovaEntregaActivity"
@@ -34,6 +34,10 @@
         <activity
             android:name=".DetalhesConsultaActivity"
             android:label="@string/title_activity_detalhes_consulta"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MotoristaMainActivity"
+            android:label="@string/title_activity_motorista_main"
             android:theme="@style/AppTheme"></activity>
     </application>
 

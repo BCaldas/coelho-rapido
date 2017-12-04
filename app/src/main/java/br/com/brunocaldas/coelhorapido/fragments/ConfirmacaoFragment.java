@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.text.DecimalFormat;
+
 import br.com.brunocaldas.coelhorapido.NovaEntregaActivity;
 import br.com.brunocaldas.coelhorapido.R;
 import br.com.brunocaldas.coelhorapido.models.Entrega;
@@ -56,7 +59,10 @@ public class ConfirmacaoFragment extends Fragment {
                             + entrega.getProduto().getPeso() + " Kg");
                 }
                 if (entrega.getOrigem() != null) {
-                    txtValor.setText("R$ " + entrega.getValor().toString());
+                    DecimalFormat df = new DecimalFormat("0.##");
+                    String dx = df.format(entrega.getValor());
+                    
+                    txtValor.setText("R$ " + dx);
                     txtDistancia.setText(entrega.getOrigem().getKmFaltante().toString());
                     txtOrigem.setText(entrega.getOrigem().getDescricao());
 
@@ -91,7 +97,7 @@ public class ConfirmacaoFragment extends Fragment {
         txtOrigem = (TextView) view.findViewById(R.id.txtOrigem);
         txtDestino = (TextView) view.findViewById(R.id.txtDestino);
         txtDistancia = (TextView) view.findViewById(R.id.txtDistancia);
-        txtValor = (TextView) view.findViewById(R.id.txtValor);
+        txtValor = (TextView) view.findViewById(R.id.txtMotorista);
         btnConfirmar = (Button) view.findViewById(R.id.btnConfirmar);
         novaEntrega = (NovaEntregaActivity) getActivity();
     }

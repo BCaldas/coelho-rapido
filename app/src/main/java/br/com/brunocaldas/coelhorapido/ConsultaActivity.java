@@ -1,12 +1,13 @@
 package br.com.brunocaldas.coelhorapido;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.brunocaldas.coelhorapido.models.Entrega;
-import br.com.brunocaldas.coelhorapido.models.Produto;
 import br.com.brunocaldas.coelhorapido.models.Usuario;
 import br.com.brunocaldas.coelhorapido.services.EntregaService;
 
@@ -41,6 +41,16 @@ public class ConsultaActivity extends AppCompatActivity {
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
         preencherListView();
+
+        lstConsulta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent intent = new Intent(getApplicationContext(), DetalhesConsultaActivity.class);
+                intent.putExtra("entrega",entregas.get(i));
+                startActivity(intent);
+            }
+        });
     }
 
     private void binding() {

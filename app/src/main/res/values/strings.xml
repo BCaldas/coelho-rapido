@@ -5,14 +5,16 @@
     <string name="prompt_email">Login</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Entrar</string>
-    <string name="title_activity_main">Coelho Rápido - Cliente</string>
+    <string name="title_activity_cliente_main">Coelho Rápido - Cliente</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Configurações</string>
     <string name="title_activity_nova_entrega">Solcicitar Entrega</string>
     <string name="title_activity_teste">Nova Entrega</string>
     <string name="title_activity_consulta">Consulta Entregas</string>
-    <string name="title_activity_detalhes_consulta">DetalhesConsultaActivity</string>
+    <string name="title_activity_detalhes_consulta">Detalhes Consulta</string>
+    <string name="title_activity_motorista_main">Coelho Rápido - Motorista</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

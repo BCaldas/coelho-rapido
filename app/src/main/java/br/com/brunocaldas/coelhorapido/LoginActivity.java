@@ -44,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
                         case CLIENTE:
                             i = new Intent(getApplicationContext(), ClienteMainActivity.class);
                             break;
+
+                        case MOTORISTA:
+                            i = new Intent(getApplication(), MotoristaMainActivity.class);
                         default:
                             break;
                     }
