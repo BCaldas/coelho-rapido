@@ -1,8 +1,8 @@
-package br.com.brunocaldas.coelhorapido;
+package br.com.brunocaldas.coelhorapido.activities.motorista;
+
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -16,33 +16,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.brunocaldas.coelhorapido.R;
+import br.com.brunocaldas.coelhorapido.activities.cliente.DetalhesConsultaActivity;
 import br.com.brunocaldas.coelhorapido.models.Entrega;
-import br.com.brunocaldas.coelhorapido.models.Usuario;
 import br.com.brunocaldas.coelhorapido.services.EntregaService;
 
-public class ConsultaActivity extends AppCompatActivity {
+public class NovasEntregasActivity extends AppCompatActivity {
 
-    ListView lstConsulta;
+    ListView lstEntregas;
     EntregaService entregaService;
     List<Entrega> entregas;
-    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consulta);
+        setContentView(R.layout.activity_novas_entregas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         binding();
-
-        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-
         preencherListView();
 
-        lstConsulta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lstEntregas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -53,13 +50,13 @@ public class ConsultaActivity extends AppCompatActivity {
         });
     }
 
-    private void binding() {
-        lstConsulta = (ListView) findViewById(R.id.lstConsulta);
+   private void binding() {
+        lstEntregas = (ListView) findViewById(R.id.lstEntregas);
         entregaService = new EntregaService();
-    }
+   }
 
     private void preencherListView() {
-        entregas = entregaService.buscarPorUsuario(usuario);
+        entregas = entregaService.buscarSemMotorista();
 
         if (entregas != null && !entregas.isEmpty()) {
 
@@ -79,7 +76,7 @@ public class ConsultaActivity extends AppCompatActivity {
                     new int[]{android.R.id.text1,
                             android.R.id.text2});
 
-            lstConsulta.setAdapter(adapter);
+            lstEntregas.setAdapter(adapter);
         }
     }
 
@@ -92,5 +89,4 @@ public class ConsultaActivity extends AppCompatActivity {
         }
         return true;
     }
-
 }

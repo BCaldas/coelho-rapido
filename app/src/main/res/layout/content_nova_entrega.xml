@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.com.brunocaldas.coelhorapido.NovaEntregaActivity"
+    tools:context="br.com.brunocaldas.coelhorapido.activities.cliente.NovaEntregaActivity"
     tools:showIn="@layout/activity_nova_entrega">
 
     <android.support.design.widget.TabLayout
@@ -22,8 +22,6 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="48dp" />
+        android:layout_height="wrap_content"/>
 
 </android.support.constraint.ConstraintLayout>

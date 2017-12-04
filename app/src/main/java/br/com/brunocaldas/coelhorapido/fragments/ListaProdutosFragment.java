@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import br.com.brunocaldas.coelhorapido.NovaEntregaActivity;
+import br.com.brunocaldas.coelhorapido.activities.cliente.NovaEntregaActivity;
 import br.com.brunocaldas.coelhorapido.R;
 import br.com.brunocaldas.coelhorapido.models.Produto;
 import br.com.brunocaldas.coelhorapido.services.ProdutoService;

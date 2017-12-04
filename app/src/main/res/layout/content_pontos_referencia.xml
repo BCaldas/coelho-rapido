@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.com.brunocaldas.coelhorapido.activities.cliente.ClienteMainActivity"
-    tools:showIn="@layout/app_bar_clientemain">
+    tools:context="br.com.brunocaldas.coelhorapido.activities.motorista.PontosReferenciaActivity"
+    tools:showIn="@layout/activity_pontos_referencia">
 
 </android.support.constraint.ConstraintLayout>

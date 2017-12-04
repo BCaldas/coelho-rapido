@@ -8,6 +8,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import br.com.brunocaldas.coelhorapido.activities.cliente.ClienteMainActivity;
+import br.com.brunocaldas.coelhorapido.activities.motorista.MotoristaMainActivity;
 import br.com.brunocaldas.coelhorapido.models.Usuario;
 import br.com.brunocaldas.coelhorapido.services.UsuarioService;
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
-import br.com.brunocaldas.coelhorapido.NovaEntregaActivity;
+import br.com.brunocaldas.coelhorapido.activities.cliente.NovaEntregaActivity;
 import br.com.brunocaldas.coelhorapido.R;
 import br.com.brunocaldas.coelhorapido.models.Entrega;
 
@@ -60,10 +60,11 @@ public class ConfirmacaoFragment extends Fragment {
                 }
                 if (entrega.getOrigem() != null) {
                     DecimalFormat df = new DecimalFormat("0.##");
-                    String dx = df.format(entrega.getValor());
-                    
-                    txtValor.setText("R$ " + dx);
-                    txtDistancia.setText(entrega.getOrigem().getKmFaltante().toString());
+                    String valor = df.format(entrega.getValor());
+                    txtValor.setText("R$ " + valor);
+
+                    String km = df.format(entrega.getOrigem().getKmFaltante());
+                    txtDistancia.setText(km + " Km");
                     txtOrigem.setText(entrega.getOrigem().getDescricao());
 
                 }

@@ -1,4 +1,4 @@
-package br.com.brunocaldas.coelhorapido;
+package br.com.brunocaldas.coelhorapido.activities.cliente;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.brunocaldas.coelhorapido.R;
 import br.com.brunocaldas.coelhorapido.fragments.ListaProdutosFragment;
 import br.com.brunocaldas.coelhorapido.fragments.ConfirmacaoFragment;
 import br.com.brunocaldas.coelhorapido.fragments.OrigemDestinoFragment;

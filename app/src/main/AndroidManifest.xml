@@ -20,24 +20,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ClienteMainActivity"
+            android:name=".activities.cliente.ClienteMainActivity"
             android:label="@string/title_activity_cliente_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".NovaEntregaActivity"
+            android:name=".activities.cliente.NovaEntregaActivity"
             android:label="@string/title_activity_teste"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ConsultaActivity"
+            android:name=".activities.cliente.ConsultaActivity"
             android:label="@string/title_activity_consulta"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DetalhesConsultaActivity"
+            android:name=".activities.cliente.DetalhesConsultaActivity"
             android:label="@string/title_activity_detalhes_consulta"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".MotoristaMainActivity"
+            android:name=".activities.motorista.MotoristaMainActivity"
             android:label="@string/title_activity_motorista_main"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.motorista.NovasEntregasActivity"
+            android:label="@string/title_activity_novas_entregas"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.motorista.PontosReferenciaActivity"
+            android:label="@string/title_activity_pontos_referencia"
             android:theme="@style/AppTheme"></activity>
     </application>
 

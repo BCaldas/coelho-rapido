@@ -1,4 +1,4 @@
-package br.com.brunocaldas.coelhorapido;
+package br.com.brunocaldas.coelhorapido.activities.motorista;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import br.com.brunocaldas.coelhorapido.LoginActivity;
+import br.com.brunocaldas.coelhorapido.R;
+import br.com.brunocaldas.coelhorapido.activities.cliente.DetalhesConsultaActivity;
 import br.com.brunocaldas.coelhorapido.models.Usuario;
 
-public class ClienteMainActivity extends AppCompatActivity
+public class MotoristaMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Usuario usuario;
@@ -28,7 +31,7 @@ public class ClienteMainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clientemain);
+        setContentView(R.layout.activity_motorista_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -70,7 +73,7 @@ public class ClienteMainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.clientemain, menu);
+        getMenuInflater().inflate(R.menu.motorista_main, menu);
         return true;
     }
 
@@ -81,8 +84,6 @@ public class ClienteMainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -92,14 +93,12 @@ public class ClienteMainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_solicitar_entrega) {
-            Intent i = new Intent(getApplicationContext(), NovaEntregaActivity.class);
-            i.putExtra("usuario",usuario);
-            startActivity(i);
-        } else if (id == R.id.nav_consultar_entrega) {
-            Intent i = new Intent(getApplicationContext(), ConsultaActivity.class);
-            i.putExtra("usuario",usuario);
-            startActivity(i);
+        if (id == R.id.nav_novas_entregas) {
+            Intent intent = new Intent(getApplicationContext(), NovasEntregasActivity.class);
+            intent.putExtra("usuario",usuario);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_registrar_ponto) {
 
         } else if (id == R.id.nav_sair) {
             finish();

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import org.joda.time.DateTime;
 import java.text.SimpleDateFormat;
 import java.util.Random;
-import br.com.brunocaldas.coelhorapido.NovaEntregaActivity;
+import br.com.brunocaldas.coelhorapido.activities.cliente.NovaEntregaActivity;
 import br.com.brunocaldas.coelhorapido.R;
 import br.com.brunocaldas.coelhorapido.models.PontoReferencia;
 import br.com.brunocaldas.coelhorapido.services.PontoReferenciaService;

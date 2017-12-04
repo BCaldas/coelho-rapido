@@ -1,4 +1,4 @@
-package br.com.brunocaldas.coelhorapido;
+package br.com.brunocaldas.coelhorapido.activities.cliente;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.brunocaldas.coelhorapido.R;
 import br.com.brunocaldas.coelhorapido.models.Entrega;
 import br.com.brunocaldas.coelhorapido.models.PontoReferencia;
 

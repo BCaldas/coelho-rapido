@@ -25,4 +25,16 @@ public class EntregaService extends BaseService<Entrega> {
         }
         return entregas;
     }
+
+    public List<Entrega> buscarSemMotorista() {
+        List<Entrega> entregasTemp = buscarTodos();
+        List<Entrega> entregas = new ArrayList<>();
+
+        for (Entrega e : entregasTemp) {
+            if (e.getMotorista() == null) {
+                entregas.add(e);
+            }
+        }
+        return entregas;
+    }
 }
