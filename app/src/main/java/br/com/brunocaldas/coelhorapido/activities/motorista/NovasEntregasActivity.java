@@ -10,15 +10,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import br.com.brunocaldas.coelhorapido.R;
-import br.com.brunocaldas.coelhorapido.activities.cliente.DetalhesConsultaActivity;
 import br.com.brunocaldas.coelhorapido.models.Entrega;
+import br.com.brunocaldas.coelhorapido.models.Usuario;
 import br.com.brunocaldas.coelhorapido.services.EntregaService;
 
 public class NovasEntregasActivity extends AppCompatActivity {
@@ -26,6 +24,7 @@ public class NovasEntregasActivity extends AppCompatActivity {
     ListView lstEntregas;
     EntregaService entregaService;
     List<Entrega> entregas;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,9 @@ public class NovasEntregasActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(getApplicationContext(), DetalhesConsultaActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PontosReferenciaActivity.class);
                 intent.putExtra("entrega",entregas.get(i));
+                intent.putExtra("usuario",usuario);
                 startActivity(intent);
             }
         });
@@ -53,6 +53,7 @@ public class NovasEntregasActivity extends AppCompatActivity {
    private void binding() {
         lstEntregas = (ListView) findViewById(R.id.lstEntregas);
         entregaService = new EntregaService();
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
    }
 
     private void preencherListView() {

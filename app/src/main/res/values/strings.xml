@@ -17,4 +17,5 @@
     <string name="title_activity_motorista_main">Coelho Rápido - Motorista</string>
     <string name="title_activity_novas_entregas">Novas Entregas</string>
     <string name="title_activity_pontos_referencia">PontosReferenciaActivity</string>
+    <string name="title_activity_registro_pontos">RegistroPontosActivity</string>
 </resources>

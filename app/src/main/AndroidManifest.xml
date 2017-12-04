@@ -46,6 +46,10 @@
         <activity
             android:name=".activities.motorista.PontosReferenciaActivity"
             android:label="@string/title_activity_pontos_referencia"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.motorista.RegistroPontosActivity"
+            android:label="@string/title_activity_registro_pontos"
             android:theme="@style/AppTheme"></activity>
     </application>
 
