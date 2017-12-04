@@ -10,7 +10,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
     <string name="title_activity_nova_entrega">Solcicitar Entrega</string>
     <string name="title_activity_teste">Nova Entrega</string>
+    <string name="title_activity_consulta">Consulta Entregas</string>
+    <string name="title_activity_detalhes_consulta">DetalhesConsultaActivity</string>
 </resources>

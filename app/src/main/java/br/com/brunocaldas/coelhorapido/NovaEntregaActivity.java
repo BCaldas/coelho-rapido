@@ -128,7 +128,7 @@ public class NovaEntregaActivity extends AppCompatActivity implements ViewPager.
     }
 
     private void calcularValor() {
-        if (entrega.getOrigem() != null) {
+        if (entrega.getOrigem() != null && entrega.getProduto() != null) {
             entrega.setValor(entrega.getProduto().getPeso() * entrega.getOrigem().getKmFaltante());
         }
     }

@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     if (i != null) {
+                        finish();
                         i.putExtra("usuario",usuario);
                         startActivity(i);
                     } else {

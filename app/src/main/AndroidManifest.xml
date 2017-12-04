@@ -27,7 +27,14 @@
             android:name=".NovaEntregaActivity"
             android:label="@string/title_activity_teste"
             android:theme="@style/AppTheme" />
-
+        <activity
+            android:name=".ConsultaActivity"
+            android:label="@string/title_activity_consulta"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".DetalhesConsultaActivity"
+            android:label="@string/title_activity_detalhes_consulta"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

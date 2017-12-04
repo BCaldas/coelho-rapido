@@ -97,8 +97,12 @@ public class ClienteMainActivity extends AppCompatActivity
             i.putExtra("usuario",usuario);
             startActivity(i);
         } else if (id == R.id.nav_consultar_entrega) {
+            Intent i = new Intent(getApplicationContext(), ConsultaActivity.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
 
         } else if (id == R.id.nav_sair) {
+            finish();
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);
         }
