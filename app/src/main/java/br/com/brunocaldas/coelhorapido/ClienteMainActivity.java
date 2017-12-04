@@ -15,8 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import br.com.brunocaldas.coelhorapido.models.Usuario;
 
 public class ClienteMainActivity extends AppCompatActivity
@@ -96,6 +94,7 @@ public class ClienteMainActivity extends AppCompatActivity
 
         if (id == R.id.nav_solicitar_entrega) {
             Intent i = new Intent(getApplicationContext(), NovaEntregaActivity.class);
+            i.putExtra("usuario",usuario);
             startActivity(i);
         } else if (id == R.id.nav_consultar_entrega) {
 

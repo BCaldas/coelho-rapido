@@ -7,14 +7,14 @@ public class PontoReferencia implements Serializable {
     private Long id;
     private String descricao;
     private String detalhe;
-    private double kmFaltante;
-    private double kmPercorrido;
+    private Double kmFaltante;
+    private Double kmPercorrido;
     private String horario;
 
     public PontoReferencia() {
         super();
     }
-    public PontoReferencia(Long id, String descricao, String detalhe, double kmFaltante, double kmPercorrido,
+    public PontoReferencia(Long id, String descricao, String detalhe, Double kmFaltante, Double kmPercorrido,
                            String horario) {
         super();
         this.id = id;
@@ -42,16 +42,16 @@ public class PontoReferencia implements Serializable {
     public void setDetalhe(String detalhe) {
         this.detalhe = detalhe;
     }
-    public double getKmFaltante() {
+    public Double getKmFaltante() {
         return kmFaltante;
     }
-    public void setKmFaltante(double kmFaltante) {
+    public void setKmFaltante(Double kmFaltante) {
         this.kmFaltante = kmFaltante;
     }
-    public double getKmPercorrido() {
+    public Double getKmPercorrido() {
         return kmPercorrido;
     }
-    public void setKmPercorrido(double kmPercorrido) {
+    public void setKmPercorrido(Double kmPercorrido) {
         this.kmPercorrido = kmPercorrido;
     }
     public String getHorario() {

@@ -1,7 +1,5 @@
 package br.com.brunocaldas.coelhorapido.services;
 
-import java.util.List;
-
 import br.com.brunocaldas.coelhorapido.models.Produto;
 
 /**

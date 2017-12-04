@@ -1,30 +1,33 @@
 package br.com.brunocaldas.coelhorapido;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
+import android.view.MenuItem;
+import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
+import br.com.brunocaldas.coelhorapido.fragments.ListaProdutosFragment;
+import br.com.brunocaldas.coelhorapido.fragments.ConfirmacaoFragment;
+import br.com.brunocaldas.coelhorapido.fragments.OrigemDestinoFragment;
+import br.com.brunocaldas.coelhorapido.models.Entrega;
+import br.com.brunocaldas.coelhorapido.models.PontoReferencia;
 import br.com.brunocaldas.coelhorapido.models.Produto;
-import br.com.brunocaldas.coelhorapido.services.ProdutoService;
+import br.com.brunocaldas.coelhorapido.models.Usuario;
+import br.com.brunocaldas.coelhorapido.services.EntregaService;
 
-public class NovaEntregaActivity extends AppCompatActivity {
+public class NovaEntregaActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
-    ProdutoService produtoService;
+    Entrega entrega;
+    Usuario usuario;
 
-    ListView lstProdutos;
+    EntregaService entregaService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,47 +38,123 @@ public class NovaEntregaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        produtoService = new ProdutoService();
-        binding();
-        preencherListView();
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        adapter.addFragment(new ListaProdutosFragment(), "Produto");
+        adapter.addFragment(new OrigemDestinoFragment(), "Destino x Origem");
+        adapter.addFragment(new ConfirmacaoFragment(), "Confirmação");
+        viewPager.setAdapter(adapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(this);
+
+        entregaService = new EntregaService();
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        entrega = new Entrega();
+        entrega.setCliente(usuario);
     }
 
-    private void binding() {
-        lstProdutos = (ListView) findViewById(R.id.lstProdutos);
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
     }
 
-    private void preencherListView() {
+    @Override
+    public void onPageSelected(int position) {
+    }
 
-        List<Produto> produtos = produtoService.buscarTodos();
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
-        if (produtos != null && !produtos.isEmpty()) {
+    }
 
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-            for (Produto p : produtos) {
+    public static class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+        private static int count = 3;
 
-                Map<String, String> datum = new HashMap<String, String>(2);
-                datum.put("produto", p.getDescricao());
-                datum.put("peso", "Peso: " + p.getPeso().toString() + " Kg");
-                data.add(datum);
-            }
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
 
-            SimpleAdapter adapter = new SimpleAdapter(this, data,
-                    android.R.layout.simple_list_item_2,
-                    new String[]{"produto", "peso"},
-                    new int[]{android.R.id.text1,
-                            android.R.id.text2});
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
 
-            lstProdutos.setAdapter(adapter);
+        @Override
+        public int getCount() {
+            return count;
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            return mFragmentTitleList.get(position);
         }
     }
 
+    public void setProduto(Produto produto) {
+        this.entrega.setProduto(produto);
+    }
+
+    public void setOrigem(PontoReferencia origem) {
+        this.entrega.setOrigem(origem);
+    }
+
+    public void setDestino(PontoReferencia destino) {
+        this.entrega.setDestino(destino);
+    }
+
+    public Entrega getEntrega() {
+
+        if (entrega != null) {
+            gerarResumo();
+            return entrega;
+        } else {
+            return null;
+        }
+    }
+
+    private void gerarResumo() {
+        calcularValor();
+        entrega.setEntregaAberta(true);
+    }
+
+    private void calcularValor() {
+        if (entrega.getOrigem() != null) {
+            entrega.setValor(entrega.getProduto().getPeso() * entrega.getOrigem().getKmFaltante());
+        }
+    }
+
+    public void salvarEntrega() {
+        if (entrega != null) {
+            entrega = entregaService.salvar(entrega);
+
+            if (entrega.getId() != null && entrega.getId() > 0) {
+                Toast.makeText(this,"Pedido de entrega feito com sucsso!",Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this,"Erro ao efetuar pedido de entrega. Por favor, tente novamente.",Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this,"Nenhum dado fornecido!",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:break;
+        }
+        return true;
+    }
 }

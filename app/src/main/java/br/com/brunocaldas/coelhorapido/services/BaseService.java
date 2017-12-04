@@ -1,16 +1,9 @@
 package br.com.brunocaldas.coelhorapido.services;
 
 import com.google.gson.Gson;
-
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import br.com.brunocaldas.coelhorapido.dtos.UsuarioLoginDTO;
-import br.com.brunocaldas.coelhorapido.models.Produto;
-import br.com.brunocaldas.coelhorapido.models.Usuario;
-
 /**
  * Created by bruno on 28/11/2017.
  */
@@ -28,7 +21,7 @@ public abstract class BaseService<T> {
         this.clazzes = clazzes;
     }
 
-    protected T buscarPorId(Integer id){
+    public T buscarPorId(Integer id){
         try {
             return new Gson().fromJson(new HttpService(path).doGet(id.toString()),clazz);
         } catch (ExecutionException e) {
@@ -39,7 +32,7 @@ public abstract class BaseService<T> {
         return null;
     }
 
-    protected List<T> buscarTodos() {
+    public List<T> buscarTodos() {
 
         try {
             T[] t = new Gson().fromJson(new HttpService(path).doGet(""),clazzes);
@@ -52,7 +45,7 @@ public abstract class BaseService<T> {
         return null;
     }
 
-    protected T salvar(T entidade) {
+    public T salvar(T entidade) {
         String params = new Gson().toJson(entidade);
 
         try {

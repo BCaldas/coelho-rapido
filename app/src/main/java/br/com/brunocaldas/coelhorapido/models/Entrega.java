@@ -13,14 +13,14 @@ public class Entrega implements Serializable {
     private Usuario motorista;
     private List<PontoReferencia> pontos;
     private Produto produto;
-    private double valor;
-    private double kmPercorrido;
+    private Double valor;
+    private Double kmPercorrido;
     private boolean entregaAberta;
     public Entrega() {
         super();
     }
     public Entrega(Long id, String cadastro, PontoReferencia origem, PontoReferencia destino, Usuario cliente,
-                   Usuario motorista, List<PontoReferencia> pontos, Produto produto, double valor, double kmPercorrido,
+                   Usuario motorista, List<PontoReferencia> pontos, Produto produto, Double valor, Double kmPercorrido,
                    boolean entregaAberta) {
         super();
         this.id = id;
@@ -83,16 +83,16 @@ public class Entrega implements Serializable {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
-    public double getKmPercorrido() {
+    public Double getKmPercorrido() {
         return kmPercorrido;
     }
-    public void setKmPercorrido(double kmPercorrido) {
+    public void setKmPercorrido(Double kmPercorrido) {
         this.kmPercorrido = kmPercorrido;
     }
     public boolean isEntregaAberta() {
