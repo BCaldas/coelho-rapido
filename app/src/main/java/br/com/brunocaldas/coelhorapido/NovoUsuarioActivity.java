@@ -44,6 +44,8 @@ public class NovoUsuarioActivity extends AppCompatActivity {
                 if (salvarUsuario().getId() != null) {
                     Toast.makeText(getApplicationContext(),"Usuário Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
                     finish();
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(i);
                 } else {
                     Toast.makeText(getApplicationContext(),"Falha ao cadastrar usuário! Tente novamente.", Toast.LENGTH_LONG).show();
                     finish();
@@ -96,6 +98,8 @@ public class NovoUsuarioActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(i);
                 break;
             default:break;
         }
