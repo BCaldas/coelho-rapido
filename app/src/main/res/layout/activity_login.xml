@@ -79,7 +79,15 @@
                     android:text="Entrar"
                     android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/btnNovoUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/holo_orange_light"
+                    android:text="Novo usuário" />
+
             </LinearLayout>
+
         </ScrollView>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -17,7 +17,7 @@ import br.com.brunocaldas.coelhorapido.services.UsuarioService;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btnLogin;
+    Button btnLogin, btnNovoUsuario;
     AutoCompleteTextView login;
     EditText senha;
     UsuarioService usuarioService;
@@ -50,11 +50,11 @@ public class LoginActivity extends AppCompatActivity {
                             break;
 
                         case MOTORISTA:
-                            i = new Intent(getApplication(), MotoristaMainActivity.class);
+                            i = new Intent(getApplicationContext(), MotoristaMainActivity.class);
                             break;
 
                         case ADMIN:
-                            i = new Intent(getApplication(), AdminMainActivity.class);
+                            i = new Intent(getApplicationContext(), AdminMainActivity.class);
                             break;
 
                         default:
@@ -74,10 +74,20 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        btnNovoUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent i = new Intent(getApplicationContext(), NovoUsuarioActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void binding() {
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnNovoUsuario = (Button) findViewById(R.id.btnNovoUsuario);
         login = (AutoCompleteTextView) findViewById(R.id.txtLogin);
         senha = (EditText) findViewById(R.id.txtSenha);
     }

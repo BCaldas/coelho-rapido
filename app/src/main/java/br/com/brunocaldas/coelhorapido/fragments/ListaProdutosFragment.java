@@ -1,5 +1,6 @@
 package br.com.brunocaldas.coelhorapido.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -7,14 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import br.com.brunocaldas.coelhorapido.activities.cliente.NovaEntregaActivity;
+
+import br.com.brunocaldas.coelhorapido.NovoProdutoActivity;
 import br.com.brunocaldas.coelhorapido.R;
+import br.com.brunocaldas.coelhorapido.activities.cliente.NovaEntregaActivity;
 import br.com.brunocaldas.coelhorapido.models.Produto;
 import br.com.brunocaldas.coelhorapido.services.ProdutoService;
 
@@ -24,6 +29,7 @@ public class ListaProdutosFragment extends Fragment {
     ListView lstProdutos;
     List<Produto> produtos;
     NovaEntregaActivity novaEntrega;
+    Button btnNovoProduto;
 
     public ListaProdutosFragment() {
 
@@ -37,10 +43,11 @@ public class ListaProdutosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lista_produtos,container,false);
+        View view = inflater.inflate(R.layout.fragment_lista_produtos, container, false);
 
         novaEntrega = (NovaEntregaActivity) getActivity();
         lstProdutos = (ListView) view.findViewById(R.id.lstProdutos);
+        btnNovoProduto = (Button) view.findViewById(R.id.btnNovoProduto);
         produtoService = new ProdutoService();
         preencherListView();
 
@@ -52,6 +59,15 @@ public class ListaProdutosFragment extends Fragment {
 
                 TabLayout tabhost = (TabLayout) getActivity().findViewById(R.id.tabs);
                 tabhost.getTabAt(1).select();
+            }
+        });
+
+        btnNovoProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                novaEntrega.finish();
+                Intent i = new Intent(getContext(), NovoProdutoActivity.class);
+                startActivity(i);
             }
         });
 

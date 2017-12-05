@@ -74,6 +74,14 @@
         <activity
             android:name=".activities.admin.LucrosActivity"
             android:label="@string/title_activity_lucros"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".NovoUsuarioActivity"
+            android:label="@string/title_activity_novo_usuario"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".NovoProdutoActivity"
+            android:label="@string/title_activity_novo_produto"
             android:theme="@style/AppTheme"></activity>
     </application>
 

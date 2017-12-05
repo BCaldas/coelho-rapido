@@ -24,5 +24,7 @@
 
     <string name="title_activity_monitoramento">Monitoramento Entregas</string>
     <string name="title_activity_detalhes_monitoramento">Detalhes Entrega</string>
-    <string name="title_activity_lucros">LucrosActivity</string>
+    <string name="title_activity_lucros">Lucros</string>
+    <string name="title_activity_novo_usuario">Novo Usuário</string>
+    <string name="title_activity_novo_produto">Novo Produto</string>
 </resources>
