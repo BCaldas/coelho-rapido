@@ -21,7 +21,7 @@ public abstract class BaseService<T> {
         this.clazzes = clazzes;
     }
 
-    public T buscarPorId(Integer id){
+    public T buscarPorId(Long id){
         try {
             return new Gson().fromJson(new HttpService(path).doGet(id.toString()),clazz);
         } catch (ExecutionException e) {

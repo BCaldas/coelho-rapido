@@ -29,6 +29,14 @@
             android:text="Escolha uma para iniciar"
             android:textAppearance="@style/TextAppearance.AppCompat" />
 
+        <TextView
+            android:id="@+id/txtMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Não há novas entregas =("
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:visibility="invisible" />
+
         <ListView
             android:id="@+id/lstEntregas"
             android:layout_width="355dp"

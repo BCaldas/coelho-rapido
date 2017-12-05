@@ -16,6 +16,11 @@
     <string name="title_activity_detalhes_consulta">Detalhes Consulta</string>
     <string name="title_activity_motorista_main">Coelho Rápido - Motorista</string>
     <string name="title_activity_novas_entregas">Novas Entregas</string>
-    <string name="title_activity_pontos_referencia">PontosReferenciaActivity</string>
-    <string name="title_activity_registro_pontos">RegistroPontosActivity</string>
+    <string name="title_activity_pontos_referencia">Pontos de Passagem</string>
+    <string name="title_activity_registro_pontos">Registro de Pontos</string>
+    <string name="title_activity_pontos_passados">Pontos Passados</string>
+    <string name="title_activity_fechar_entrega">Fechar Entrega</string>
+    <string name="title_activity_admin_main">Coelho Rápido - Admin</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

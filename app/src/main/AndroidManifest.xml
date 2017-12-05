@@ -50,7 +50,19 @@
         <activity
             android:name=".activities.motorista.RegistroPontosActivity"
             android:label="@string/title_activity_registro_pontos"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.motorista.PontosPassadosActivity"
+            android:label="@string/title_activity_pontos_passados"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.motorista.FecharEntregaActivity"
+            android:label="@string/title_activity_fechar_entrega"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.admin.AdminMainActivity"
+            android:label="@string/title_activity_admin_main"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

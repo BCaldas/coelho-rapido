@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.com.brunocaldas.coelhorapido.activities.motorista.RegistroPontosActivity"
-    tools:showIn="@layout/activity_registro_pontos">
+    tools:context="br.com.brunocaldas.coelhorapido.activities.motorista.PontosPassadosActivity"
+    tools:showIn="@layout/activity_pontos_passados">
 
     <LinearLayout
         android:layout_width="368dp"
@@ -16,18 +16,19 @@
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/textView16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Escolha uma das suas entregas abaixo:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            tools:layout_editor_absoluteX="119dp"
-            tools:layout_editor_absoluteY="0dp" />
+            android:text="Escolh ao ponto que deseja registrar passagem."
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <ListView
-            android:id="@+id/lstEntregas"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:id="@+id/lstPontos"
+            android:layout_width="357dp"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" >
+
+        </ListView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

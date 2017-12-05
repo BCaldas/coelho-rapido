@@ -1,6 +1,5 @@
 package br.com.brunocaldas.coelhorapido.activities.motorista;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,26 +8,34 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import org.joda.time.DateTime;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import br.com.brunocaldas.coelhorapido.R;
 import br.com.brunocaldas.coelhorapido.models.Entrega;
-import br.com.brunocaldas.coelhorapido.models.Usuario;
-import br.com.brunocaldas.coelhorapido.services.EntregaService;
+import br.com.brunocaldas.coelhorapido.models.PontoReferencia;
 
-public class RegistroPontosActivity extends AppCompatActivity {
+import br.com.brunocaldas.coelhorapido.services.PontoReferenciaService;
 
-    EntregaService entregaService;
-    Usuario usuario;
-    List<Entrega> entregas;
-    ListView lstEntregas;
+public class PontosPassadosActivity extends AppCompatActivity {
+
+    ListView lstPontos;
+    Entrega entrega;
+    List<PontoReferencia> pontos;
+    PontoReferenciaService pontoReferenciaService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro_pontos);
+        setContentView(R.layout.activity_pontos_passados);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -37,46 +44,51 @@ public class RegistroPontosActivity extends AppCompatActivity {
         binding();
         preencherListView();
 
-        lstEntregas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lstPontos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(getApplicationContext(), PontosPassadosActivity.class);
-                intent.putExtra("entrega",entregas.get(i));
-                intent.putExtra("usuario",usuario);
-                startActivity(intent);
+                PontoReferencia p = pontos.get(i);
+
+                DateTime dtInicial = DateTime.now();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+                p.setHorario("="+sdf.format(dtInicial.toDate()));
+                pontoReferenciaService.salvar(p);
+
+                Toast.makeText(getApplicationContext(),"Ponto registrado com sucesso!",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
 
     private void binding() {
-        entregaService = new EntregaService();
-        lstEntregas = (ListView) findViewById(R.id.lstEntregas);
-        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        lstPontos = (ListView) findViewById(R.id.lstPontos);
+        entrega = (Entrega) getIntent().getSerializableExtra("entrega");
+        pontoReferenciaService = new PontoReferenciaService();
     }
 
     private void preencherListView() {
-        entregas = entregaService.buscarPorMotorista(usuario);
+        pontos = pontoReferenciaService.filtrarSemData(entrega.getPontos());
 
-        if (entregas != null && !entregas.isEmpty()) {
+        if (pontos != null && !pontos.isEmpty()) {
 
             List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-            for (Entrega e : entregas) {
+            for (PontoReferencia p : pontos) {
+                    Map<String, String> datum = new HashMap<String, String>(2);
+                    datum.put("nome", p.getDescricao());
+                    datum.put("descricao", p.getDetalhe());
+                    data.add(datum);
 
-                Map<String, String> datum = new HashMap<String, String>(2);
-                datum.put("produto", e.getProduto().getDescricao());
-                datum.put("locais", "ORIGEM: " + e.getOrigem().getDescricao()
-                        + " | " + "DESTINO: " + e.getDestino().getDescricao());
-                data.add(datum);
             }
 
             SimpleAdapter adapter = new SimpleAdapter(this, data,
                     android.R.layout.simple_list_item_2,
-                    new String[]{"produto", "locais"},
+                    new String[]{"nome", "descricao"},
                     new int[]{android.R.id.text1,
                             android.R.id.text2});
 
-            lstEntregas.setAdapter(adapter);
+            lstPontos.setAdapter(adapter);
         }
     }
 
@@ -88,11 +100,5 @@ public class RegistroPontosActivity extends AppCompatActivity {
             default:break;
         }
         return true;
-    }
-
-    @Override
-    protected void onResume() {
-        preencherListView();
-        super.onResume();
     }
 }

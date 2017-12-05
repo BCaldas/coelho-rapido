@@ -9,8 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.brunocaldas.coelhorapido.R;
@@ -28,6 +31,7 @@ public class PontosReferenciaActivity extends AppCompatActivity {
 
     Button btnSalvar, btnFinalizar;
     EditText nome, descricao, kmPercorridos;
+    TextView kmFaltantes;
 
     Usuario usuario;
     Entrega entrega;
@@ -44,6 +48,10 @@ public class PontosReferenciaActivity extends AppCompatActivity {
 
         binding();
 
+        DecimalFormat df = new DecimalFormat("0.##");
+        String km = df.format(entrega.getOrigem().getKmFaltante());
+        kmFaltantes.setText("Km's restantes para o fim da viagem: " + km);
+
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,19 +62,29 @@ public class PontosReferenciaActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Por favor, preencha todos os campos",Toast.LENGTH_SHORT).show();
                 } else {
                     PontoReferencia p = new PontoReferencia();
-                    p.setDescricao(nome.getText().toString());
-                    p.setDetalhe(descricao.getText().toString());
-                    p.setKmPercorrido(Double.parseDouble(kmPercorridos.getText().toString()));
-                    p.setKmFaltante(entrega.getOrigem().getKmFaltante() - p.getKmPercorrido());
 
-                    p = pontoReferenciaService.salvar(p);
-                    pontos.add(p);
+                    Double kmFaltante = entrega.getOrigem().getKmFaltante() - Double.parseDouble(kmPercorridos.getText().toString());
 
-                    nome.setText("");
-                    descricao.setText("");
-                    kmPercorridos.setText("");
+                    if (kmFaltante < 0) {
+                        Toast.makeText(getApplicationContext(),"Os kilômetros faltantes não podem ser negativos",Toast.LENGTH_LONG).show();
+                    } else {
+                        p.setDescricao(nome.getText().toString());
+                        p.setDetalhe(descricao.getText().toString());
+                        p.setKmPercorrido(Double.parseDouble(kmPercorridos.getText().toString()));
+                        p.setKmFaltante(entrega.getOrigem().getKmFaltante() - p.getKmPercorrido());
+                        p = pontoReferenciaService.salvar(p);
 
-                    Toast.makeText(getApplicationContext(),"Ponto de referência cadastrado com sucesso!",Toast.LENGTH_SHORT).show();
+                        pontos.add(p);
+                        Toast.makeText(getApplicationContext(),"Ponto de referência cadastrado com sucesso!",Toast.LENGTH_SHORT).show();
+
+                        DecimalFormat df = new DecimalFormat("0.##");
+                        String km = df.format(p.getKmFaltante());
+                        kmFaltantes.setText("Km's restantes para o fim da viagem: " + km);
+
+                        nome.setText("");
+                        descricao.setText("");
+                        kmPercorridos.setText("");
+                    }
                 }
             }
         });
@@ -75,6 +93,7 @@ public class PontosReferenciaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 entrega.setPontos(pontos);
+                entrega.setMotorista(usuario);
                 entregaService.salvar(entrega);
                 Toast.makeText(getApplicationContext(),"Entrega atualizada e transporte iniciado. Boa viagem!",Toast.LENGTH_LONG).show();
                 finish();
@@ -85,10 +104,12 @@ public class PontosReferenciaActivity extends AppCompatActivity {
     private void binding() {
         pontoReferenciaService = new PontoReferenciaService();
         entregaService = new EntregaService();
+        pontos = new ArrayList<>();
 
         nome = (EditText) findViewById(R.id.txtNome);
         descricao = (EditText) findViewById(R.id.txtDescricao);
         kmPercorridos = (EditText) findViewById(R.id.txtKm);
+        kmFaltantes = (TextView) findViewById(R.id.txtKmFaltantes);
 
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
         btnFinalizar = (Button) findViewById(R.id.btnFinalizar);
@@ -106,5 +127,4 @@ public class PontosReferenciaActivity extends AppCompatActivity {
         }
         return true;
     }
-
 }

@@ -62,7 +62,6 @@ public class HttpService extends AsyncTask<Void, Void, String> {
                 output.write(postParams.getBytes());
                 output.flush();
                 output.close();
-
             }
 
             BufferedReader br = new BufferedReader(
