@@ -62,7 +62,19 @@
         <activity
             android:name=".activities.admin.AdminMainActivity"
             android:label="@string/title_activity_admin_main"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.admin.MonitoramentoActivity"
+            android:label="@string/title_activity_monitoramento"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.admin.DetalhesMonitoramentoActivity"
+            android:label="@string/title_activity_detalhes_monitoramento"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.admin.LucrosActivity"
+            android:label="@string/title_activity_lucros"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

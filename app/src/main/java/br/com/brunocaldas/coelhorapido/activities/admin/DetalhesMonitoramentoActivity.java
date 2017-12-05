@@ -1,14 +1,15 @@
-package br.com.brunocaldas.coelhorapido.activities.cliente;
+package br.com.brunocaldas.coelhorapido.activities.admin;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import br.com.brunocaldas.coelhorapido.R;
 import br.com.brunocaldas.coelhorapido.models.Entrega;
 import br.com.brunocaldas.coelhorapido.models.PontoReferencia;
 
-public class DetalhesConsultaActivity extends AppCompatActivity {
+public class DetalhesMonitoramentoActivity extends AppCompatActivity {
 
     Entrega entrega;
     TextView txtStatus, txtValor, txtMotorista;
@@ -29,7 +30,7 @@ public class DetalhesConsultaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalhes_consulta);
+        setContentView(R.layout.activity_detalhes_monitoramento);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

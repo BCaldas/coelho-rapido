@@ -1,5 +1,6 @@
 package br.com.brunocaldas.coelhorapido.activities.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,11 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import br.com.brunocaldas.coelhorapido.LoginActivity;
 import br.com.brunocaldas.coelhorapido.R;
+import br.com.brunocaldas.coelhorapido.models.Usuario;
 
 public class AdminMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    Usuario usuario;
+
+    TextView lblNome, lblEmail;
+    NavigationView menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +33,6 @@ public class AdminMainActivity extends AppCompatActivity
         setContentView(R.layout.activity_admin_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -42,6 +42,12 @@ public class AdminMainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        binding();
+
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        lblNome.setText(usuario.getNome());
+        lblEmail.setText(usuario.getEmail());
     }
 
     @Override
@@ -68,11 +74,6 @@ public class AdminMainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -82,22 +83,31 @@ public class AdminMainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_monitorar_entregas) {
+            Intent i = new Intent(getApplicationContext(), MonitoramentoActivity.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_lucros) {
+            Intent i = new Intent(getApplicationContext(), LucrosActivity.class);
+            i.putExtra("usuario",usuario);
+            startActivity(i);
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_sair) {
+            finish();
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void binding() {
+        menu = (NavigationView) findViewById(R.id.nav_view);
+        View headerMenu = menu.getHeaderView(0);
+        lblNome = (TextView) headerMenu.findViewById(R.id.lblNomeUsuario);
+        lblEmail = (TextView) headerMenu.findViewById(R.id.lblEmailUsuario);
     }
 }

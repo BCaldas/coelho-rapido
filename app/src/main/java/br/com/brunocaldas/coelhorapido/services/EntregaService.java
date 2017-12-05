@@ -83,4 +83,14 @@ public class EntregaService extends BaseService<Entrega> {
         }
         return abertas;
     }
+
+    public Double retornarLucros() {
+        List<Entrega> entregas = buscarTodos();
+        Double total = 0.0;
+
+        for (Entrega e: entregas) {
+            total += e.getValor();
+        }
+        return total;
+    }
 }
