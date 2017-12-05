@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 
 public class HttpService extends AsyncTask<Void, Void, String> {
 
-    private static final String baseUrl = "http://192.168.25.10:8080/api/";
+    private static final String baseUrl = "https://service.davesmartins.com.br/api/";
 
     private String method;
     private String path;
